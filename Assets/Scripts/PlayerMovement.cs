@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] LayerMask blockLayer;
     Rigidbody2D rigidbody2D;
 
-    float speed;
+    float speed = 0;
+    float jumpPower = 400;
 
     public enum MOVE_DIRECTION
     {
         STOP,
         LEFT,
         RIGHT,
-
     }
 
     MOVE_DIRECTION moveDirection = MOVE_DIRECTION.STOP;
@@ -40,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDirection = MOVE_DIRECTION.LEFT;
         }
+        if (IsGround() && Input.GetKeyDown("space"))
+        {
+            Jump();
+        }
     }
 
     private void FixedUpdate()
@@ -57,5 +62,16 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
         rigidbody2D.velocity = new Vector2(speed, rigidbody2D.velocity.y);
+    }
+
+    void Jump()
+    {
+        rigidbody2D.AddForce(Vector2.up * jumpPower);
+    }
+
+    bool IsGround()
+    {
+        return Physics2D.Linecast(transform.position - transform.right * 0.3f, transform.position - transform.up * 0.1f, blockLayer)
+            || Physics2D.Linecast(transform.position + transform.right * 0.3f, transform.position - transform.up * 0.1f, blockLayer);
     }
 }
