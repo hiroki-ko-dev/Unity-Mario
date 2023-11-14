@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] LayerMask blockLayer;
-    Rigidbody2D rigidbody2D;
+    Rigidbody2D rigidBody2D;
 
     float speed = 0;
     float jumpPower = 400;
@@ -22,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidBody2D = GetComponent<Rigidbody2D>();
+        transform.localScale = new Vector2(4, 4);
     }
 
     // Update is called once per frame
@@ -55,18 +56,20 @@ public class PlayerMovement : MonoBehaviour
                 speed = 0;
                 break;
             case MOVE_DIRECTION.RIGHT:
-                speed = 3;
+                speed = 5;
+                transform.localScale = new Vector2(4, 4);
                 break;
             case MOVE_DIRECTION.LEFT:
-                speed = -3;
+                speed = -5;
+                transform.localScale = new Vector2(-4, 4);
                 break;
         }
-        rigidbody2D.velocity = new Vector2(speed, rigidbody2D.velocity.y);
+        rigidBody2D.velocity = new Vector2(speed, rigidBody2D.velocity.y);
     }
 
     void Jump()
     {
-        rigidbody2D.AddForce(Vector2.up * jumpPower);
+        rigidBody2D.AddForce(Vector2.up * jumpPower);
     }
 
     bool IsGround()
