@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 320317789}
   - component: {fileID: 320317788}
   - component: {fileID: 320317787}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pig (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,8 +265,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1155229971
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4335316af6a6cf3419566d1c9313d2b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3711,7 +3711,7 @@ GameObject:
   - component: {fileID: 1304819440}
   - component: {fileID: 1304819439}
   - component: {fileID: 1304819438}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pig (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3839,8 +3839,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1155229971
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4335316af6a6cf3419566d1c9313d2b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3882,7 +3882,7 @@ GameObject:
   - component: {fileID: 1338416649}
   - component: {fileID: 1338416648}
   - component: {fileID: 1338416647}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pig (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4010,8 +4010,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1155229971
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4335316af6a6cf3419566d1c9313d2b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4184,6 +4184,13 @@ MonoBehaviour:
   blockLayer:
     serializedVersion: 2
     m_Bits: 256
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 576
+  jumpSound: {fileID: 8300000, guid: 20f5985bd85f645e5bd84718101e665e, type: 3}
+  enemyStompSound: {fileID: 8300000, guid: d73b7ad7d8f4e4a5fab471039e7ef56e, type: 3}
+  blinkTime: 1
+  blinkInterval: 0.1
 --- !u!61 &1622899562
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4224,7 +4231,7 @@ GameObject:
   - component: {fileID: 1634211776}
   - component: {fileID: 1634211775}
   - component: {fileID: 1634211774}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pig (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4352,8 +4359,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1155229971
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4335316af6a6cf3419566d1c9313d2b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4440,7 +4447,7 @@ GameObject:
   - component: {fileID: 1958743168}
   - component: {fileID: 1958743167}
   - component: {fileID: 1958743166}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4506,8 +4513,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1155229971
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4335316af6a6cf3419566d1c9313d2b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
