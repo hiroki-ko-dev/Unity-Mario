@@ -2,31 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyMove : MonoBehaviour
 {
-    [SerializeField] LayerMask blockLayer;
-    Rigidbody2D rigidBody2D;
+    private EnemyMoveStrategy enemyMoveStrategy;
 
-    // Start is called before the first frame update
-    void Start()
+    Rigidbody2D rigidBody2D;
+    Collider2D enemyCollider;
+
+    private void Awake()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
+        enemyCollider = GetComponent<Collider2D>();
+        enemyMoveStrategy = GetComponent<EnemyMoveStrategy>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         transform.localScale = new Vector2(-4, 4);
-        rigidBody2D.velocity = new Vector2(-3, rigidBody2D.velocity.y);
+        Move();
+    }
+
+    private void Move()
+    {
+        if (enemyMoveStrategy != null)
+        {
+            enemyMoveStrategy.Move(rigidBody2D);
+        }
     }
 
     public void blowAway()
     {
         // Collider2Dコンポーネントを取得し無効にする
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null)
+
+        if (enemyCollider != null)
         {
-            collider.enabled = false;
+            enemyCollider.enabled = false;
         }
 
         // 放物線運動を実現するための力を設定

@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip jumpSound;
     public AudioClip enemyStompSound;
+    public AudioClip damageSound;
     Rigidbody2D rigidBody2D;
 
     float speed = 0;
@@ -93,12 +94,12 @@ public class PlayerMovement : MonoBehaviour
                 Jump();
 
                 // 敵オブジェクトのEnemyControllerコンポーネントを取得
-                EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
+                EnemyMove enemyMove = collision.gameObject.GetComponent<EnemyMove>();
 
                 // EnemyControllerのblowAwayメソッドを呼び出す
-                if (enemyController != null)
+                if (enemyMove != null)
                 {
-                    enemyController.blowAway();
+                    enemyMove.blowAway();
                     if (audioSource != null && enemyStompSound != null)
                     {
                         audioSource.PlayOneShot(enemyStompSound);
@@ -106,6 +107,10 @@ public class PlayerMovement : MonoBehaviour
                 }
             } else
             {
+                if (audioSource != null && damageSound != null)
+                {
+                    audioSource.PlayOneShot(damageSound);
+                }
                 StartCoroutine(Blink(blinkTime, blinkInterval));
             }
         }
