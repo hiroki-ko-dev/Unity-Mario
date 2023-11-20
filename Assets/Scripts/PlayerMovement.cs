@@ -11,9 +11,12 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip enemyStompSound;
     public AudioClip damageSound;
     Rigidbody2D rigidBody2D;
+    [SerializeField] HealthDisplay health;
+    [SerializeField] GameManager gameManager;
 
     float speed = 0;
     float jumpPower = 400;
+    private bool isBlinking = false;
 
     public float blinkTime = 1f;    // 点滅の継続時間
     public float blinkInterval = 0.05f; // 点滅の間隔
@@ -84,6 +87,11 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        EnemyCollision(collision);
+    }
+
+    void EnemyCollision(Collision2D collision)
+    {
         // 敵との衝突を検出
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
@@ -105,12 +113,9 @@ public class PlayerMovement : MonoBehaviour
                         audioSource.PlayOneShot(enemyStompSound);
                     }
                 }
-            } else
+            }
+            else
             {
-                if (audioSource != null && damageSound != null)
-                {
-                    audioSource.PlayOneShot(damageSound);
-                }
                 StartCoroutine(Blink(blinkTime, blinkInterval));
             }
         }
@@ -118,7 +123,14 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Blink(float duration, float interval)
     {
+        isBlinking = true;
         float time = 0;
+        health.TakeDamage(1);
+
+        if (audioSource != null && damageSound != null)
+        {
+            audioSource.PlayOneShot(damageSound);
+        }
 
         while (time < duration)
         {
@@ -133,6 +145,34 @@ public class PlayerMovement : MonoBehaviour
 
         // 点滅終了時にレンダラーを必ず有効にする
         spriteRenderer.enabled = true;
+        if (health.getHealthLenght() <= 0)
+        {
+            gameManager.GameOver();
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
+        isBlinking = false;
+
+        // 点滅が終了した後に敵と接触しているかチェック
+        CheckEnemyCollisionAfterBlink();
+    }
+
+    void CheckEnemyCollisionAfterBlink()
+    {
+        // チェックするボックスのサイズと中心位置を設定
+        Vector2 boxSize = new Vector2(1f, 1f); // 例として1x1のサイズ
+        Vector2 boxCenter = transform.position; // プレイヤーの位置を中心とする
+
+        // 指定したボックス内で敵レイヤーのコライダーとの重なりをチェック
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f, enemyLayer);
+
+        foreach (var enemy in enemies)
+        {
+            // 敵との接触を検出した場合、再度Blinkを開始する
+            StartCoroutine(Blink(blinkTime, blinkInterval));
+            break; // 一つ見つけたらループを抜ける
+        }
     }
 
     void Jump()
